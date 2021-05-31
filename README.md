@@ -12,6 +12,7 @@ A ws/wss plugin using the [WebsocketSharp](https://github.com/sta/websocket-shar
     │   └── ... .zip
 	├── WebProt.exe
 	:
+	├── Logging.io.dll
 	└── Plugable.io.dll
 	
 ### Dev structure
@@ -22,6 +23,7 @@ A ws/wss plugin using the [WebsocketSharp](https://github.com/sta/websocket-shar
 	├── ThirdParty
     │   └── WebsocketSharp
     │   └── ...
+	├── Logging.io
 	├── Plugable.io
 	:
 	└── WebProt
