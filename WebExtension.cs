@@ -134,26 +134,34 @@ namespace WebProt.WebSocket.Provider
 
                         if (SecuredArgument != null)
                         {
-                            foreach (var value in SecuredArgument.Values)
+
+                            var certFile = Path.Combine("certificates", "server.pfx");
+                            var certPass = "admin123$";
+
+                            if (File.Exists(certFile))
                             {
-                                if (serverCertificate == null)
-                                    serverCertificate = new System.Security.Cryptography.X509Certificates.X509Certificate2(Path.Combine("certificates", "server.pfx"), "admin123$");
+                                foreach (var value in SecuredArgument.Values)
+                                {
+                                    if (serverCertificate == null)
+                                        serverCertificate = new System.Security.Cryptography.X509Certificates.X509Certificate2(certFile, certPass);
 
-                                //Logger.InfoFormat("Setting up (wss) on {0}", value);
-                                var srv_ws = new WebSocketServer(IPAddress.Any, value, true);
-                                srv_ws.SslConfiguration.ServerCertificate = serverCertificate;
-                                var sslProtocolHack = (System.Security.Authentication.SslProtocols)(SslProtocolsHack.Tls12 | SslProtocolsHack.Tls11 | SslProtocolsHack.Tls);
-                                srv_ws.SslConfiguration.EnabledSslProtocols = sslProtocolHack;
-                                srv_ws.Plugins(plugins, args, server);
-                                secured_ws.Add(srv_ws);
+                                    //Logger.InfoFormat("Setting up (wss) on {0}", value);
+                                    var srv_ws = new WebSocketServer(IPAddress.Any, value, true);
+                                    srv_ws.SslConfiguration.ServerCertificate = serverCertificate;
+                                    var sslProtocolHack = (System.Security.Authentication.SslProtocols)(SslProtocolsHack.Tls12 | SslProtocolsHack.Tls11 | SslProtocolsHack.Tls);
+                                    srv_ws.SslConfiguration.EnabledSslProtocols = sslProtocolHack;
+                                    srv_ws.Plugins(plugins, args, server);
+                                    secured_ws.Add(srv_ws);
 
-                                /*Logger.InfoFormat("Setting up (https) on {0}", value);
-                                var srv_http = new HttpServer(IPAddress.Any, value, true);
-                                srv_http.SslConfiguration.ServerCertificate = serverCertificate;
-                                srv_http.Log.Level = WebSocketSharp.LogLevel.Trace;
-                                srv_http.Plugins(plugins, args, server);
-                                secured_http.Add(srv_http);*/
+                                    /*Logger.InfoFormat("Setting up (https) on {0}", value);
+                                    var srv_http = new HttpServer(IPAddress.Any, value, true);
+                                    srv_http.SslConfiguration.ServerCertificate = serverCertificate;
+                                    srv_http.Log.Level = WebSocketSharp.LogLevel.Trace;
+                                    srv_http.Plugins(plugins, args, server);
+                                    secured_http.Add(srv_http);*/
+                                }
                             }
+                            else Logger.InfoFormat(getName() + " cant create wss : {0}", "missing certificate");
                         }
 
                         server.LogEvent += (s, arg) =>
