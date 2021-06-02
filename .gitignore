@@ -2,3 +2,5 @@
 obj/
 bin/
 packages/
+Plugins/WebProt.WebSocket.Provider/WebProt.WebSocket.Provider_dev.csproj
+Plugins/WebProt.WebSocket.Provider/WebProt.WebSocket.Provider_dev.sln
