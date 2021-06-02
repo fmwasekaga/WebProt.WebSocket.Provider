@@ -1,22 +1,20 @@
 ﻿#region Using
 using CommandLineParser.Arguments;
 using CommandLineParser.Exceptions;
+using Logging.io;
+using Newtonsoft.Json;
+using Plugable.io;
+using Plugable.io.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
-using Logging.io;
-using WebSocketSharp.Server;
-using WebProt.WebSocket.Provider.Extensions;
-using Newtonsoft.Json;
-using System.Globalization;
-using Plugable.io.Interfaces;
-using Plugable.io;
 using System.Reflection;
-using System.IO.Compression;
+using WebProt.WebSocket.Provider.Extensions;
+using WebProt.WebSocket.Provider.Helpers;
+using WebSocketSharp.Server;
 #endregion
 
 namespace WebProt.WebSocket.Provider
@@ -52,7 +50,7 @@ namespace WebProt.WebSocket.Provider
                 {
                     ValueArgument<string> argument = new ValueArgument<string>('p', "wp", "Arguements for this plugin");
 
-                    var _parser = new CommandLineParser.CommandLineParser(args);
+                    var _parser = new CustomCommandLineParser(args);
                     _parser.Arguments.Add(argument);
                     _parser.ParseCommandLine();
 
@@ -74,7 +72,7 @@ namespace WebProt.WebSocket.Provider
 
                 if (parsedArgs != null)
                 {
-                    var parser = new CommandLineParser.CommandLineParser(parsedArgs);
+                    var parser = new CustomCommandLineParser(parsedArgs);
 
                     ValueArgument<int> nonSecuredArgument = new ValueArgument<int>('w', "ws", "The web socket port");
                     nonSecuredArgument.AllowMultiple = true;
