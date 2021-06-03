@@ -59,14 +59,6 @@
       <Project>{1a3c2477-db30-488f-a2ea-5fbe4d18a091}</Project>
       <Name>Plugable.io</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\ThirdParty\CommandLineParser\CommandLineParser.csproj">
-      <Project>{dcf8e084-93ed-4dca-bca1-6fbd6c64932a}</Project>
-      <Name>CommandLineParser</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\ThirdParty\WebsocketSharp\websocket-sharp.csproj">
-      <Project>{b357bac7-529e-4d81-a0d2-71041b19c8de}</Project>
-      <Name>websocket-sharp</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Logging.io\Logging.io.csproj">
       <Project>{6c1d1d22-67f7-4621-8a69-afa1ad1149d6}</Project>
       <Name>Logging.io</Name>
